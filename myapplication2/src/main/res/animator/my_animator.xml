@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:ordering="sequentially">
+    <objectAnimator
+        android:duration="1000"
+        android:propertyName="app_color"
+        android:repeatCount="infinite"
+        android:repeatMode="reverse"
+        android:startOffset="100"
+        android:valueFrom="@color/colorPrimary"
+        android:valueTo="@color/colorAccent"
+        android:valueType="floatType" />
+    <animator
+        android:duration="1000"
+        android:repeatCount="infinite"
+        android:repeatMode="reverse"
+        android:startOffset="100"
+        android:valueFrom="@dimen/d8"
+        android:valueTo="@dimen/d1"
+        android:valueType="floatType" />
+</set>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="my_style" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:background">@color/c6</item>
+        <item name="android:textSize">@dimen/d1</item>
+    </style>
+</resources>

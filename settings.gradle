@@ -1,0 +1,28 @@
+//声明加入project 一个apk 或一个lib都叫一个project 一个project有一个build.gradle文件
+//三个对象 gradle对象(执行命令时产生对象) setting对象   project对象(每一个project都是)
+//该文件名字必须为settings.gradle 用来包含所有的project,实现Multiproject
+//include也是一个函数 它的各参数之间要加, 哦 这是settings.gradle文件里的主要功能
+//也可做一些私活.
+//Gradle工作流程: 初始化-->配置-->执行
+//初始化就是执行了settings.gradle文件
+//配置:解析每个build.gradle之间的关系,确定依赖关系,向图. 我们可以在这些流程中间加入hook,实现一些定制的功能处理函数
+//执行任务
+
+def initMinshengGradleEnvironment(){
+    println"initialize  Gradle Environment ....."
+    //干一些special的私活....
+    println"initialize Gradle Environment completes... Tu Yaxiong settings.gradle>>>"
+    //可为gradle对象设置外置属性,以便在其它脚本文件中也可调用到.
+    Properties properties = new Properties()
+    File propertyFile = new File(rootDir.getAbsolutePath() +"/local.properties")
+    properties.load(propertyFile.newDataInputStream())
+    //gradle就是gradle对象。它默认是Settings和Project的成员变量。可直接获取
+    //ext前缀，表明操作的是外置属性。api是一个新的属性名。前面说过，只在
+    //第一次定义或者设置它的时候需要ext前缀//读取local.properties中信息
+    gradle.ext.dir =properties.getProperty('sdk.dir')
+    gradle.ext.releaseKeystore= properties.getProperty('release.keystore')
+    println gradle.dir  //再次存取api的时候，就不需要ext前缀了
+}
+//settings.gradle加载的时候，会执行initMinshengGradleEnvironment
+initMinshengGradleEnvironment()
+include ':myapplication2'

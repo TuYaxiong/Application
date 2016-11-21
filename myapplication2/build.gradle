@@ -1,0 +1,92 @@
+
+//插件即一系列的task组成,不同的project用到不同的插件,任务的量由这个插件决定..
+//build.gradle对应一个project对象
+//常实现功能:加载插件 配置(源文件读取路径啊.)设置属性
+//加载插件用到apply函数 常用到apply(Map(String,?))  key取:plugin/from/to
+//设置属性,若要跨脚本则乃至ext属性 project gradle支持ext, 可用来为对象设置外置属性
+apply plugin: 'com.android.application'    //加载插件apk
+//调用的方法只能得到它的返回值>..
+task hello <<{println "hello"
+      println printx
+}
+println 'Start execute>>>myapplication2'
+//对于APK，除了拷贝APK文件到指定目录外，我还特意为它们加上了自动版本命名的功能//获取下面android SB里的信息.
+tasks.getByName("assemble") {
+    it.doLast {
+        println "$project.name: After assemble, jar libs are copied tolocal repository"
+        project.ext.versionName = android.defaultConfig.versionName
+        println "\t versionName = $versionName"
+        copyOutput(false)//这是一个拷贝打包完成的apk包方法,没有提供实现..
+    }
+}
+
+android {                                   //android SB
+    compileSdkVersion 21                   //required
+    buildToolsVersion '21.1.1'              //required
+
+    defaultConfig {
+        applicationId "com.example.tyxiong.myapplication"
+        minSdkVersion 9
+        targetSdkVersion 21
+        versionCode 1
+        versionName "1.0"
+    }
+
+
+        signingConfigs {//签名设置
+        release{  //release对应的SB。注意
+            if(project.gradle.releaseKeystore != null){
+                println "sign release>>>"
+                storeFile file("${project.gradle.releaseKeystore}")//settings.gradle中设置定义的ext属性
+                storePassword "2576286789"
+                keyAlias "tyxsigned"
+                keyPassword "2576286789"
+            }
+        }
+    }
+    buildTypes {//目录下加demo效果是打包会有demo的apk生成,,原始只添加了debug release
+        demo{ //demo版需要混淆
+            //proguardFile 'proguard-project.txt'
+
+            signingConfig signingConfigs.release
+        }
+        release {
+
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    productFlavors {
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+}
+//其他和posdevice 类似的处理。来看如何动态生成runtime_config文件
+def  runtime_config_file = project.getProjectDir().absolutePath+"/src/main/assets/runtime_config.xml"
+/*E:\Java\Android\MyApplication\myapplication2
+   我们在gradle解析完整个任务之后，找到对应的Task，然后在里边添加一个doFirst Action
+   这样能确保编译开始的时候，我们就把runtime_config文件准备好了。
+   注意，必须在afterEvaluate里边才能做，否则gradle没有建立完任务有向图，你是找不到
+   什么preDebugBuild之类的任务的
+   */
+project.afterEvaluate {
+    //找到preDebugBuild任务，然后添加一个Action
+    tasks.getByName("preDebugBuild") {
+        it.doFirst {
+            println "generate debug configuration for ${project.name}"
+            def configFile = new File(runtime_config_file)
+            configFile.withOutputStream { os ->
+                os << 'I am Debug \n '  //往配置文件里写 I am Debug
+            }
+
+        }
+    }
+}
+dependencies {//外部依赖jar自动生成的.
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile files('libs/ksoap2-android-assembly-3.4.0-jar-with-dependencies.jar')
+}

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:interpolator="@android:anim/linear_interpolator"
+    android:shareInterpolator="true"
+    android:duration="4000"
+    >
+
+    <alpha android:fromAlpha="1.0"
+        android:toAlpha="0.3"
+        android:duration="4000"/>
+
+    <!--下面的属性要设置全哦,不然效果不对的.想要保留动画结束状态fillAfter,需要java代码中设置 pivotx,缩放中心点-->
+    <scale android:fromXScale="1.0"
+        android:toXScale="1.4"
+        android:fromYScale="1.0"
+        android:toYScale="0.6"
+        android:pivotY="50%"
+        android:pivotX="50%"
+        android:fillAfter="true"
+        android:duration="2000"/>
+    <!--Delta的值相对对象本身位置而言的.-->
+    <translate
+        android:fromXDelta="10"
+        android:toXDelta="50.0"
+        android:fromYDelta="40"
+        android:toYDelta="100"
+        android:duration="4000"/>
+    <!--x,y旋转点-->
+    <rotate
+        android:fromDegrees="0"
+        android:pivotY="50%"
+        android:pivotX="50%"
+        android:toDegrees="60"
+        android:duration="4000"
+        />
+
+</set>

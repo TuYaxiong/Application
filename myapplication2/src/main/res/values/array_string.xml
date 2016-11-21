@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="arr1">
+        <item>@string/bn1</item>
+        <item>@string/bn2</item>
+    </string-array>
+</resources>

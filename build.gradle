@@ -1,0 +1,43 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+//buildscript Block里面可以包含repositories dependencies两个函数.
+//这个project叫root project用来配置它的子project的通用属性 一个project有多个task组成
+//gradlew projects可查看root project的所有子project情况
+//gradle projectpath:tasks 可查看指定porject的所有的task
+// gradlew help --task <task> 查看一个任务的detail 如查看clean任务的detial   gradlew help --task clean
+//gradlew properites用来查看所有属性信息      gradlew <task>直接执行指定任务.
+//gradle常见属性　gradle属性表示实例
+/*
+println "Home Dir:" + gradle.gradleHomeDir
+println "User Home Dir:" + gradle.gradleUserHomeDir
+println "Parent: " + gradle.parent*/
+println 'Starting Configration >>>'
+buildscript {
+    repositories {
+        jcenter()
+    }
+//gradle插件
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.1.2'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {//创建以Delete为基类的任务
+    delete rootProject.buildDir
+}
+
+
+//下面这个subprojects{}就是一个Script Block
+subprojects {
+   // println"Configure for $project.name"+this.toString() //遍历子Project，project变量对应每个子Project
+        //为每个子Project加载utils.gradle 。当然，这句话可以放到buildscript花括号之后
+      apply from: rootProject.getRootDir().getAbsolutePath() + "/utils.gradle"
+    }//buildscript结束

@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="bnPre">上一张</string>
+    <string name="bnNext">下一张</string>
+    <string name="change">自动播放</string>
+    <string name="lt"><![CDATA[<]]></string>
+    <string name="gt"><![CDATA[>]]></string>
+    <string name="book">搜索书名:</string>
+    <string name="bn1">AlertDialog</string>
+    <string name="bn2">ProgressDialog</string>
+    <string name="text_color">字体颜色</string>
+    <string name="red">红色</string>
+    <string name="green">绿色</string>
+    <string name="blue">蓝色</string>
+    <string name="text_size">字体大小</string>
+    <string name="_10sp">10sp</string>
+    <string name="_20sp">20sp</string>
+    <string name="_25sp">25sp</string>
+    <string name="text_setting">文本设置</string>
+    <string name="也是">确定</string>
+    <string name="primary_key">Primary key</string>
+    <string name="my_name">my_name</string>
+    <string name="my_id">my_id</string>
+</resources>

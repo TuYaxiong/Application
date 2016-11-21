@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/a1"
+        android:bottom="@dimen/d1"
+        android:drawable="@drawable/icon1" />
+
+    <item
+        android:id="@+id/a2"
+        android:bottom="@dimen/d2"
+        android:drawable="@drawable/icon2" />
+    <item
+        android:id="@+id/a3"
+        android:bottom="@dimen/d3"
+        android:drawable="@drawable/icon3" />
+    <item
+        android:id="@+id/a4"
+        android:bottom="@dimen/d4"
+        android:drawable="@drawable/icon4" />
+</layer-list>

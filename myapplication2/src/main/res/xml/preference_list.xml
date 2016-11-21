@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
+    <header
+        android:fragment="com.example.tyxiong.myapplication.MainActivity$prefer1"
+        android:icon="@android:drawable/ic_menu_set_as"
+        android:title="程序设置选项"
+        android:summary="设置应用的相关选项">
+
+    </header>
+<!--这里决定了内部内须为静态内 类相关,否则找不到的.-->
+    <header
+        android:fragment="com.example.tyxiong.myapplication.MainActivity$prefer2"
+        android:icon="@android:drawable/ic_menu_set_as"
+        android:title="界面设置选项"
+        android:summary="设置应用界面的相关选项">
+
+    </header>
+</preference-headers>
